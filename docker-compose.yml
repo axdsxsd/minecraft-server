@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  mc:
+    build: .
+    container_name: fabric-server
+    environment:
+      - EULA=true
+      - OFFLINE=true
+      - JAVA_XMS=2G
+      - JAVA_XMX=4G
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./world:/server/world
+      - ./logs:/server/logs
+      - ./config:/server/config
+      - ./mods:/server/mods
+    restart: unless-stopped
