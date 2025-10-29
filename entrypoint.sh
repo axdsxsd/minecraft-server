@@ -25,19 +25,31 @@ if [[ ! -f server.properties ]]; then
   echo "Priming server files (first run)..."
   java -Xms${JAVA_XMS:-2G} -Xmx${JAVA_XMX:-4G} -jar fabric-server-launch.jar nogui &
   PID=$!
-  # Даем время создать конфиги, затем останавливаем
-  sleep 15 || true
+  
+  # Ждем появления server.properties (максимум 60 секунд)
+  MAX_WAIT=60
+  ELAPSED=0
+  while [[ ! -f server.properties ]] && [[ $ELAPSED -lt $MAX_WAIT ]]; do
+    sleep 2
+    ELAPSED=$((ELAPSED + 2))
+    if ! kill -0 "$PID" 2>/dev/null; then
+      echo "Server process died during priming" >&2
+      exit 1
+    fi
+  done
+  
+  if [[ ! -f server.properties ]]; then
+    echo "ERROR: server.properties was not created after ${MAX_WAIT}s of priming!" >&2
+    kill "$PID" 2>/dev/null || true
+    exit 1
+  fi
+  
+  # Даем еще немного времени для завершения инициализации
+  sleep 5 || true
   kill "$PID" 2>/dev/null || true
-  # На всякий случай подождем завершения
   wait "$PID" 2>/dev/null || true
   sleep 2 || true
   echo "Server files generated"
-fi
-
-# Проверяем, что server.properties создался
-if [[ ! -f server.properties ]]; then
-  echo "ERROR: server.properties was not created after priming!" >&2
-  exit 1
 fi
 
 # 3) Настройки под неофициальный клиент (можно переопределить OFFLINE=false)
