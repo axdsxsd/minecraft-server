@@ -1,0 +1,27 @@
+# Worlds
+world/
+world_nether/
+world_the_end/
+
+# Runtime
+logs/
+crash-reports/
+debug.log
+usercache.json
+whitelist.json
+ops.json
+banned-players.json
+banned-ips.json
+eula.txt
+fabricloader.log
+
+# Binaries
+libraries/
+fabric-server-launch.jar
+server.jar
+
+# Mods jars (store only manifest)
+mods/*.jar
+
+# OS
+.DS_Store

@@ -1,0 +1,9 @@
+{
+  "expAllMultiplier": 0.2,
+  "enableExpAll": false,
+  "forceExpAll": false,
+  "addBucketToData": true,
+  "addSpawnCauseToData": true,
+  "preventQuickBallSpam": true,
+  "debug": false
+}

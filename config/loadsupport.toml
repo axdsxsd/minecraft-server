@@ -1,0 +1,4 @@
+startSound = false
+minMemory = 4.0
+errorTitle = "Error: this modpack needs at least 4 GB RAM!"
+errorDescription = "Open Modrinth App settings > click on Default instance options > under Memory allocated input 4096 or more."
