@@ -25,3 +25,7 @@ mods/*.jar
 
 # OS
 .DS_Store
+
+# Fabric cache
+.fabric/
+versions/
