@@ -3,6 +3,11 @@ set -euo pipefail
 
 cd /server
 
+# Удаляем клиентские моды, которые ломают сервер
+if [[ -d mods ]]; then
+  find mods -name "cobblemon-ui-tweaks*.jar" -delete 2>/dev/null || true
+fi
+
 # Проверяем наличие jar файла
 if [[ ! -f fabric-server-launch.jar ]]; then
   echo "ERROR: fabric-server-launch.jar not found!" >&2
