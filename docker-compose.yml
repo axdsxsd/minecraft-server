@@ -8,8 +8,8 @@ services:
       - OFFLINE=true
       - JAVA_XMS=2G
       - JAVA_XMX=4G
-    ports:
-      - "25565:25565"
+    # Используем host network, чтобы порт 25565 всегда был доступен без публикации
+    network_mode: host
     volumes:
       - ./world:/server/world
       - ./logs:/server/logs
